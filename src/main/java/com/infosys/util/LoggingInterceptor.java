@@ -1,4 +1,4 @@
-package com.infosys;
+package com.infosys.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,6 @@ public class LoggingInterceptor implements HandlerInterceptor
     {
         logger.debug("In postHandle request processing "
                      + "completed by @RestController");
-
     }
 
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception

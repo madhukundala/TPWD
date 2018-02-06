@@ -1,4 +1,4 @@
-package com.infosys.model;
+package com.infosys.exceptions;
 
 public class ErrorResource
 {

@@ -1,4 +1,4 @@
-package com.infosys.exceptions;
+package com.infosys.util;
 
 /**
  * Created by madhu.kundala on 2/5/2018.

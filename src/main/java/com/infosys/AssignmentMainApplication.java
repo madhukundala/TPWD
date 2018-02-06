@@ -9,9 +9,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -25,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackages = {"com.infosys"})
 @ConfigurationProperties(prefix = "spring")
 @EnableSwagger2
-public class AssignmentMainApplication extends WebMvcConfigurerAdapter
+public class AssignmentMainApplication extends WebSecurityConfigurerAdapter
 {
     @Autowired
     private Environment env;
@@ -36,11 +36,9 @@ public class AssignmentMainApplication extends WebMvcConfigurerAdapter
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry)
-    {
-        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/");
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
     }
-
 
     @Bean
     public Docket api()

@@ -58,7 +58,7 @@ public class AssignmentRestController
 
 
     @GetMapping(value = "/triangleType", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Get trianle Type Response", response = ResponseEntity.class)
+    @ApiOperation(value = "Get triangle Type Response", response = ResponseEntity.class)
     public ResponseEntity<String> getTriangleType(@RequestParam(value = "a", required = true) Integer a, @RequestParam(value = "b", required = true) Integer b, @RequestParam(value = "c", required = true) Integer c) throws ServiceException
     {
         String resultValue = assignmentService.getTriangleType(a, b, c);

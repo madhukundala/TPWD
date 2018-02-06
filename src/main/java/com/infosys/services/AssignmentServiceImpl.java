@@ -5,7 +5,7 @@ package com.infosys.services;
  */
 
 import com.infosys.exceptions.ServiceException;
-import com.infosys.exceptions.TriangleTypes;
+import com.infosys.util.TriangleTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,11 +122,11 @@ public class AssignmentServiceImpl implements AssignmentService
         {
             return TriangleTypes.ISOSCELES.name();
         }
-        else if(a!=b && b!=c && c!=a)
+        else if (a >= b+c || c >= b+a || b >= a+c)
         {
-            return TriangleTypes.SCALENE.name();
+            return TriangleTypes.INVALID.name();
         }
-        return TriangleTypes.INVALID.name();
+        return TriangleTypes.SCALENE.name();
     }
 
     /**
