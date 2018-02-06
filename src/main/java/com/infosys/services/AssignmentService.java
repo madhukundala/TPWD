@@ -4,7 +4,7 @@ import com.infosys.exceptions.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public interface AssignmentService
@@ -15,7 +15,7 @@ public interface AssignmentService
 
     String getTriangleType(Integer a, Integer b, Integer c) throws ServiceException;
 
-    LinkedHashMap<String, ArrayList> getMakeoneArray(Collection<ArrayList> inputValue) throws ServiceException;
+    Map<String, ArrayList> getMakeoneArray(Collection inputValue) throws ServiceException;
 
 }
 

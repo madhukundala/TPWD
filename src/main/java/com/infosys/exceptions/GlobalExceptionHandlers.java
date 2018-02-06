@@ -15,7 +15,7 @@ public class GlobalExceptionHandlers
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(ServiceException.class)
     @ResponseBody
-    public ResponseEntity<ErrorResource> handleServiceUnavailableException(ServiceException ex)
+    public ResponseEntity<ErrorResource> handleServiceException(ServiceException ex)
     {
         return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
     }

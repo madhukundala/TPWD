@@ -35,6 +35,7 @@ public class AssignmentMainApplication extends WebMvcConfigurerAdapter
         SpringApplication.run(AssignmentMainApplication.class, args);
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry)
     {
         registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/");
@@ -53,7 +54,7 @@ public class AssignmentMainApplication extends WebMvcConfigurerAdapter
 
     private ApiInfo apiInfo()
     {
-        ApiInfo apiInfo = new ApiInfo(
+        return new ApiInfo(
                 "Assigment Services API",
                 "This API allows the create test api's",
                 "1.0",
@@ -61,7 +62,7 @@ public class AssignmentMainApplication extends WebMvcConfigurerAdapter
                 new Contact("Madhu Kundala", "", "madhu.kundala@infosys.com"),
                 "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0.html");
-        return apiInfo;
+
     }
 
 

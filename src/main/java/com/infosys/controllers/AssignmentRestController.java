@@ -4,6 +4,8 @@ import com.infosys.exceptions.ServiceException;
 import com.infosys.services.AssignmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.CacheControl;
@@ -17,14 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/api")
-@Api(value = "assigmentSerivices", description = "Assignment Controller")
+@Api(value = "assignmentServices")
 public class AssignmentRestController
 {
+
+    private static final Logger logger = LoggerFactory.getLogger(AssignmentRestController.class);
 
     @Autowired
     AssignmentService assignmentService;
@@ -34,6 +38,7 @@ public class AssignmentRestController
     public ResponseEntity<Long> getFibonacciSeries(@RequestParam(value = "n", required = true) Integer inputValue) throws ServiceException
     {
         Long resultValue = assignmentService.getFibonacciSeries(inputValue);
+        logger.debug("result", resultValue);
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())
@@ -66,9 +71,9 @@ public class AssignmentRestController
 
     @PostMapping(value = "/makeoneArray", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get Single Array Response", response = ResponseEntity.class)
-    public ResponseEntity<LinkedHashMap<String, ArrayList>> getMakeOneArray(@RequestBody LinkedHashMap<String, ArrayList> linkedHashMapObjects) throws ServiceException
+    public ResponseEntity<Map<String, ArrayList>> getMakeOneArray(@RequestBody Map<String, ArrayList> linkedHashMapObjects) throws ServiceException
     {
-        LinkedHashMap<String, ArrayList> resultValue = assignmentService.getMakeoneArray(linkedHashMapObjects.values());
+        Map<String, ArrayList> resultValue = assignmentService.getMakeoneArray(linkedHashMapObjects.values());
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())
