@@ -1,7 +1,7 @@
 ---
 applications:
-- name: assignment-spring
-  memory: 768M
+- name: test_Assignment
+  memory: 500M
   instances: 1
   random-route: true
   path: target/test_Assignment-0.0.1.jar

@@ -1,17 +1,5 @@
 package com.infosys.services;
 
-/**
- * Created by madhu.kundala on 2/5/2018.
- */
-
-import com.infosys.exceptions.ServiceException;
-import com.infosys.util.TriangleTypes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,13 +7,23 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by madhu.kundala on 2/5/2018.
+ */
+
+import com.infosys.exceptions.ServiceException;
+import com.infosys.util.TriangleTypes;
+
 @Service
 public class AssignmentServiceImpl implements AssignmentService
 {
 
     private static final Logger logger = LoggerFactory.getLogger(AssignmentServiceImpl.class);
-    @Autowired
-    RestTemplate restTemplate;
+   
 
 
     /**
