@@ -4,4 +4,5 @@ applications:
   memory: 768M
   instances: 1
   random-route: true
-  path: target/test_Assignment-0.0.1.jar AssignmentMainApplication
+  path: target/test_Assignment-0.0.1.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack
