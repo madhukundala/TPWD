@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by madhu.kundala on 2/5/2018.
@@ -135,7 +135,7 @@ public class AssignmentServiceImpl implements AssignmentService
     @Override
     public Map<String, ArrayList> getMakeoneArray(Collection inputList) throws ServiceException
     {
-        Set<Integer> hs = new HashSet<>();
+        Set<Integer> hs = new TreeSet<>();
 
         Collection<ArrayList> collection = inputList;
         for (ArrayList arrayList : collection)
