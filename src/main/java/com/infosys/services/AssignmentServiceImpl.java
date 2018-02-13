@@ -71,15 +71,15 @@ public class AssignmentServiceImpl implements AssignmentService
      * @throws ServiceException
      */
     @Override
-    public String getReverseWords(String inputvalue) throws ServiceException
+    public String getReverseWords(String inputvalue) throws ServiceException, Exception
     {
         if (null == inputvalue)
         {
             throw new ServiceException("Input cannot be null");
         }
-        String[] words = inputvalue.split("\\+");
+        String[] words = inputvalue.split(" ");
         StringBuilder reversedString = new StringBuilder("");
-
+        String result = null;
         for (int i = 0;
              i < words.length;
              i++)
@@ -94,7 +94,8 @@ public class AssignmentServiceImpl implements AssignmentService
             }
             reversedString = reversedString.append(reverseWord + " ");
         }
-        return reversedString.toString().trim();
+        result = reversedString.toString().trim();
+        return result;
     }
 
     /**
@@ -116,7 +117,7 @@ public class AssignmentServiceImpl implements AssignmentService
             {
                 return TriangleTypes.EQUILATERAL.name();
             }
-            else if (((side1 == side2) && (side2 != side3)) || ((side2 == side3) && (side3 != side1)))
+            else if (side1 == side2 || side2 == side3 || side1 == side3)
             {
                 return TriangleTypes.ISOSCELES.name();
             }
@@ -134,14 +135,12 @@ public class AssignmentServiceImpl implements AssignmentService
 
     private boolean checkValidTriangle(Integer a, Integer b, Integer c)
     {
-        if (a + b < c || a + c < b || b + c < a)
+        boolean result = false;
+        if (!(a + b < c || a + c < b || b + c < a))
         {
-            return false;
+            result = true;
         }
-        else
-        {
-            return true;
-        }
+        return result;
     }
 
     /**

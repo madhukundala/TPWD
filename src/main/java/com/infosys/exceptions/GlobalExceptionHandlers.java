@@ -41,7 +41,7 @@ public class GlobalExceptionHandlers
     @ResponseBody
     public ResponseEntity<ErrorResource> handleIllegalArgumentException(IllegalArgumentException ex)
     {
-        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), "Invalid character found in the request " + ex.getMessage()));
     }
 
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
@@ -49,7 +49,7 @@ public class GlobalExceptionHandlers
     @ResponseBody
     public ResponseEntity<ErrorResource> handleException(Exception ex)
     {
-        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.METHOD_NOT_ALLOWED.value(), "Please contact your administrator " + ex.getMessage()));
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.METHOD_NOT_ALLOWED.value(), ex.getMessage()));
     }
 
 }

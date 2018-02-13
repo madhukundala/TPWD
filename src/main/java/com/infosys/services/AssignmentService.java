@@ -12,7 +12,7 @@ public interface AssignmentService
 {
     BigInteger getFibonacciSeries(Integer inputValue) throws ServiceException;
 
-    String getReverseWords(String inputValue) throws ServiceException;
+    String getReverseWords(String inputValue) throws ServiceException, Exception;
 
     String getTriangleType(Integer a, Integer b, Integer c) throws ServiceException;
 

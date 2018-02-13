@@ -245,13 +245,25 @@ public class AssignmentTest
     }
 
     @Test
-    public void testReverseWordBadRequest()
+    public void testReverseWordBadRequest() throws Exception
     {
         String value = null;
         try
         {
             assignmentService.getReverseWords(value);
             Assert.fail("Expected ServiceException");
+        }
+        catch (ServiceException e)
+        {
+            Assert.assertNotNull(e.getMessage());
+            Assert.assertEquals("Input cannot be null", e.getMessage());
+        }
+
+        value = "who  wq@%%##qw";
+        try
+        {
+            String result = assignmentService.getReverseWords(value);
+            Assert.assertEquals(result, "ohw  wq##%%@qw");
         }
         catch (ServiceException e)
         {
@@ -268,6 +280,25 @@ public class AssignmentTest
         {
             RequestBuilder requestBuilder = MockMvcRequestBuilders
                     .get("/api/reverseWords?sentence1=how are you")
+                    .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON);
+            MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+            MockHttpServletResponse response = result.getResponse();
+            Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+        }
+        catch (Exception e)
+        {
+            Assert.fail(e.toString());
+        }
+    }
+
+
+    @Test
+    public void testFibonacciBadReq() throws Exception
+    {
+        try
+        {
+            RequestBuilder requestBuilder = MockMvcRequestBuilders
+                    .get("/api/fibonacci?n=q")
                     .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON);
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();
             MockHttpServletResponse response = result.getResponse();
