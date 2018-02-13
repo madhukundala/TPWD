@@ -1,12 +1,10 @@
 package com.infosys;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.exceptions.ServiceException;
+import com.infosys.services.AssignmentService;
+import com.infosys.util.TriangleTypes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -30,11 +28,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infosys.exceptions.ServiceException;
-import com.infosys.services.AssignmentService;
-import com.infosys.util.TriangleTypes;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Unit test for AssignmentTest App.
@@ -204,6 +203,12 @@ public class AssignmentTest
     {
         String result = assignmentService.getTriangleType(1, 1, 1);
         Assert.assertEquals(result, TriangleTypes.EQUILATERAL.name());
+
+        String result1 = assignmentService.getTriangleType(1, 34, 1);
+        Assert.assertEquals(result1, TriangleTypes.ISOSCELES.name());
+
+        String result2 = assignmentService.getTriangleType(10, 12, 34);
+        Assert.assertEquals(result2, TriangleTypes.SCALENE.name());
     }
 
     @Test
@@ -212,8 +217,14 @@ public class AssignmentTest
         String result = assignmentService.getTriangleType(1, 0, 1);
         Assert.assertEquals(result, TriangleTypes.INVALID.name());
 
-        String result1 = assignmentService.getTriangleType(1, 34, 1);
-        Assert.assertEquals(result1, TriangleTypes.ISOSCELES.name());
+        String result2 = assignmentService.getTriangleType(8, 0, 1);
+        Assert.assertEquals(result2, TriangleTypes.INVALID.name());
+
+        String result3 = assignmentService.getTriangleType(8, 30, 1);
+        Assert.assertEquals(result3, TriangleTypes.SCALENE.name());
+
+        String result4 = assignmentService.getTriangleType(8, 0, 15);
+        Assert.assertEquals(result4, TriangleTypes.INVALID.name());
     }
 
     @Test
@@ -221,6 +232,12 @@ public class AssignmentTest
     {
         long result = assignmentService.getFibonacciSeries(10);
         Assert.assertEquals(result, 55L);
+
+        long result1 = assignmentService.getFibonacciSeries(1);
+        Assert.assertEquals(result1, 1L);
+
+        long result2 = assignmentService.getFibonacciSeries(2);
+        Assert.assertEquals(result2, 1L);
     }
 
     @Test

@@ -1,5 +1,11 @@
 package com.infosys.services;
 
+import com.infosys.exceptions.ServiceException;
+import com.infosys.util.TriangleTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -7,23 +13,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 /**
  * Created by madhu.kundala on 2/5/2018.
  */
-
-import com.infosys.exceptions.ServiceException;
-import com.infosys.util.TriangleTypes;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService
 {
 
     private static final Logger logger = LoggerFactory.getLogger(AssignmentServiceImpl.class);
-   
 
 
     /**
@@ -120,11 +118,11 @@ public class AssignmentServiceImpl implements AssignmentService
         {
             return TriangleTypes.ISOSCELES.name();
         }
-        else if (a >= b+c || c >= b+a || b >= a+c)
+        else if ((a != b) && (b != c) && (c != a))
         {
-            return TriangleTypes.INVALID.name();
+            return TriangleTypes.SCALENE.name();
         }
-        return TriangleTypes.SCALENE.name();
+        return TriangleTypes.INVALID.name();
     }
 
     /**
