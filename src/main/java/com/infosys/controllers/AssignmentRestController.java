@@ -75,7 +75,7 @@ public class AssignmentRestController
     @ApiOperation(value = "Get Single Array Response", response = ResponseEntity.class)
     public ResponseEntity<Map<String, ArrayList>> getMakeOneArray(@RequestBody Map<String, ArrayList> linkedHashMapObjects) throws ServiceException
     {
-        Map<String, ArrayList> resultValue = assignmentService.getMakeoneArray(linkedHashMapObjects.values());
+        Map<String, ArrayList> resultValue = assignmentService.getMakeOneArray(linkedHashMapObjects.values());
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())

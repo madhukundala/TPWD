@@ -16,7 +16,7 @@ public interface AssignmentService
 
     String getTriangleType(Integer a, Integer b, Integer c) throws ServiceException;
 
-    Map<String, ArrayList> getMakeoneArray(Collection inputValue) throws ServiceException;
+    Map<String, ArrayList> getMakeOneArray(Collection inputValue) throws ServiceException;
 
 }
 

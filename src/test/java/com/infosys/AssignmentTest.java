@@ -86,7 +86,7 @@ public class AssignmentTest
         String jsonOutputString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayOutput);
 
         JSONAssert.assertEquals(jsonOutputString, response.getContentAsString(), JSONCompareMode.NON_EXTENSIBLE);
-        Mockito.verify(assignmentMockService, Mockito.times(0)).getMakeoneArray(Mockito.anyList());
+        Mockito.verify(assignmentMockService, Mockito.times(0)).getMakeOneArray(Mockito.anyList());
     }
 
     @Test
@@ -192,11 +192,11 @@ public class AssignmentTest
                 new TypeReference<LinkedHashMap<String, ArrayList>>()
                 {
                 });
-        Mockito.when(assignmentMockService.getMakeoneArray(Mockito.anyCollection())).thenReturn(arrayList);
+        Mockito.when(assignmentMockService.getMakeOneArray(Mockito.anyCollection())).thenReturn(arrayList);
         Map<String, ArrayList> linkedHashMapObjects = new LinkedHashMap<String, ArrayList>();
-        Map<String, ArrayList> result = assignmentMockService.getMakeoneArray(linkedHashMapObjects.values());
+        Map<String, ArrayList> result = assignmentMockService.getMakeOneArray(linkedHashMapObjects.values());
         Assert.assertEquals(result, arrayList);
-        Mockito.verify(assignmentMockService, Mockito.times(1)).getMakeoneArray(Mockito.anyCollection());
+        Mockito.verify(assignmentMockService, Mockito.times(1)).getMakeOneArray(Mockito.anyCollection());
     }
 
     @Test
@@ -206,7 +206,7 @@ public class AssignmentTest
         Assert.assertEquals(result, TriangleTypes.EQUILATERAL.name());
 
         String result1 = assignmentService.getTriangleType(1, 34, 1);
-        Assert.assertEquals(result1, TriangleTypes.SCALENE.name());
+        Assert.assertEquals(result1, TriangleTypes.INVALID.name());
 
         String result2 = assignmentService.getTriangleType(10, 12, 34);
         Assert.assertEquals(result2, TriangleTypes.INVALID.name());
@@ -215,17 +215,13 @@ public class AssignmentTest
     @Test
     public void testTriangleTypeInvalidService() throws Exception
     {
-        String result = assignmentService.getTriangleType(1, 0, 1);
-        Assert.assertEquals(result, TriangleTypes.INVALID.name());
 
         String result2 = assignmentService.getTriangleType(8, 0, 1);
-        Assert.assertEquals(result2, TriangleTypes.SCALENE.name());
+        Assert.assertEquals(result2, TriangleTypes.INVALID.name());
 
         String result3 = assignmentService.getTriangleType(8, 30, 1);
-        Assert.assertEquals(result3, TriangleTypes.SCALENE.name());
+        Assert.assertEquals(result3, TriangleTypes.INVALID.name());
 
-        String result4 = assignmentService.getTriangleType(8, 0, 15);
-        Assert.assertEquals(result4, TriangleTypes.INVALID.name());
     }
 
     @Test
@@ -260,7 +256,7 @@ public class AssignmentTest
         catch (ServiceException e)
         {
             Assert.assertNotNull(e.getMessage());
-            Assert.assertEquals("Invalid Value", e.getMessage());
+            Assert.assertEquals("Input cannot be null", e.getMessage());
         }
     }
 

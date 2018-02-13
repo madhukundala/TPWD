@@ -36,5 +36,20 @@ public class GlobalExceptionHandlers
         return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), "Invalid Input " + ex.getMessage()));
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResource> handleIllegalArgumentException(IllegalArgumentException ex)
+    {
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
+    }
+
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResource> handleException(Exception ex)
+    {
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.METHOD_NOT_ALLOWED.value(), "Please contact your administrator " + ex.getMessage()));
+    }
 
 }

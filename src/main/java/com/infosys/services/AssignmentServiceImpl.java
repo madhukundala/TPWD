@@ -77,7 +77,7 @@ public class AssignmentServiceImpl implements AssignmentService
         {
             throw new ServiceException("Input cannot be null");
         }
-        String[] words = inputvalue.split(" ");
+        String[] words = inputvalue.split("\\+");
         StringBuilder reversedString = new StringBuilder("");
 
         for (int i = 0;
@@ -110,13 +110,13 @@ public class AssignmentServiceImpl implements AssignmentService
     public String getTriangleType(Integer side1, Integer side2, Integer side3)
             throws ServiceException
     {
-        if ((side1 + side2 > side3))
+        if (checkValidTriangle(side1, side2, side3))
         {
             if ((side1 == side2) && (side2 == side3))
             {
                 return TriangleTypes.EQUILATERAL.name();
             }
-            else if ((side1 == side2) && (side2 != side3) || (side2 == side3) && (side3 != side1))
+            else if (((side1 == side2) && (side2 != side3)) || ((side2 == side3) && (side3 != side1)))
             {
                 return TriangleTypes.ISOSCELES.name();
             }
@@ -132,6 +132,18 @@ public class AssignmentServiceImpl implements AssignmentService
         return TriangleTypes.INVALID.name();
     }
 
+    private boolean checkValidTriangle(Integer a, Integer b, Integer c)
+    {
+        if (a + b < c || a + c < b || b + c < a)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     /**
      * This method return the sum of arrays.
      *
@@ -140,7 +152,7 @@ public class AssignmentServiceImpl implements AssignmentService
      * @throws ServiceException
      */
     @Override
-    public Map<String, ArrayList> getMakeoneArray(Collection inputList) throws ServiceException
+    public Map<String, ArrayList> getMakeOneArray(Collection inputList) throws ServiceException
     {
         Set<Integer> hs = new TreeSet<>();
 
