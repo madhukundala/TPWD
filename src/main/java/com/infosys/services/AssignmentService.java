@@ -2,6 +2,7 @@ package com.infosys.services;
 
 import com.infosys.exceptions.ServiceException;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public interface AssignmentService
 {
-    Long getFibonacciSeries(Integer inputValue) throws ServiceException;
+    BigInteger getFibonacciSeries(Integer inputValue) throws ServiceException;
 
     String getReverseWords(String inputValue) throws ServiceException;
 

@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -141,8 +142,8 @@ public class AssignmentTest
     @Test
     public void testFibonacciService() throws Exception
     {
-        Mockito.when(assignmentMockService.getFibonacciSeries(10)).thenReturn(55L);
-        Long result = assignmentMockService.getFibonacciSeries(10);
+        Mockito.when(assignmentMockService.getFibonacciSeries(10)).thenReturn(new BigInteger("55"));
+        BigInteger result = assignmentMockService.getFibonacciSeries(10);
         Assert.assertEquals(result.longValue(), 55L);
         Mockito.verify(assignmentMockService, Mockito.times(1)).getFibonacciSeries(Mockito.anyInt());
     }
@@ -158,7 +159,7 @@ public class AssignmentTest
         catch (ServiceException e)
         {
             Assert.assertNotNull(e.getMessage());
-            Assert.assertEquals(e.getMessage(), "Invalid Value");
+            Assert.assertEquals(e.getMessage(), "Invalid Value null");
         }
     }
 
@@ -205,10 +206,10 @@ public class AssignmentTest
         Assert.assertEquals(result, TriangleTypes.EQUILATERAL.name());
 
         String result1 = assignmentService.getTriangleType(1, 34, 1);
-        Assert.assertEquals(result1, TriangleTypes.ISOSCELES.name());
+        Assert.assertEquals(result1, TriangleTypes.SCALENE.name());
 
         String result2 = assignmentService.getTriangleType(10, 12, 34);
-        Assert.assertEquals(result2, TriangleTypes.SCALENE.name());
+        Assert.assertEquals(result2, TriangleTypes.INVALID.name());
     }
 
     @Test
@@ -218,7 +219,7 @@ public class AssignmentTest
         Assert.assertEquals(result, TriangleTypes.INVALID.name());
 
         String result2 = assignmentService.getTriangleType(8, 0, 1);
-        Assert.assertEquals(result2, TriangleTypes.INVALID.name());
+        Assert.assertEquals(result2, TriangleTypes.SCALENE.name());
 
         String result3 = assignmentService.getTriangleType(8, 30, 1);
         Assert.assertEquals(result3, TriangleTypes.SCALENE.name());
@@ -230,14 +231,14 @@ public class AssignmentTest
     @Test
     public void testFibonacciActualService() throws Exception
     {
-        long result = assignmentService.getFibonacciSeries(10);
-        Assert.assertEquals(result, 55L);
+        BigInteger result = assignmentService.getFibonacciSeries(10);
+        Assert.assertEquals(result, new BigInteger("55"));
 
-        long result1 = assignmentService.getFibonacciSeries(1);
-        Assert.assertEquals(result1, 1L);
+        BigInteger result1 = assignmentService.getFibonacciSeries(1);
+        Assert.assertEquals(result1, new BigInteger("1"));
 
-        long result2 = assignmentService.getFibonacciSeries(2);
-        Assert.assertEquals(result2, 1L);
+        BigInteger result2 = assignmentService.getFibonacciSeries(2);
+        Assert.assertEquals(result2, new BigInteger("1"));
     }
 
     @Test

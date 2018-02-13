@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -32,31 +33,34 @@ public class AssignmentServiceImpl implements AssignmentService
      * @throws ServiceException
      */
     @Override
-    public Long getFibonacciSeries(Integer inputvalue)
+    public BigInteger getFibonacciSeries(Integer inputvalue)
             throws ServiceException
     {
         if (null == inputvalue)
         {
-            throw new ServiceException("Invalid Value");
+            throw new ServiceException("Invalid Value " + inputvalue);
         }
-
         if (inputvalue == 1 || inputvalue == 2)
         {
-            return Long.valueOf(1);
+            return new BigInteger("1");
         }
-        int fibo1 = 1;
-        int fibo2 = 1;
-        int fibonacci = 1;
+        if (inputvalue <= 0)
+        {
+            throw new ServiceException("Invalid Value " + inputvalue);
+        }
+        BigInteger fibo1 = new BigInteger("1");
+        BigInteger fibo2 = new BigInteger("1");
+        BigInteger fibonacci = new BigInteger("1");
         for (int i = 3;
              i <= inputvalue;
              i++)
         {
-            fibonacci = fibo1 + fibo2;
+            fibonacci = fibo1.add(fibo2);
             fibo1 = fibo2;
             fibo2 = fibonacci;
         }
         logger.debug("fibonacci", fibonacci);
-        return Long.valueOf(fibonacci);
+        return fibonacci;
     }
 
     /**
@@ -71,7 +75,7 @@ public class AssignmentServiceImpl implements AssignmentService
     {
         if (null == inputvalue)
         {
-            throw new ServiceException("Invalid Value");
+            throw new ServiceException("Input cannot be null");
         }
         String[] words = inputvalue.split(" ");
         StringBuilder reversedString = new StringBuilder("");
@@ -96,31 +100,34 @@ public class AssignmentServiceImpl implements AssignmentService
     /**
      * This method return the triangle types
      *
-     * @param a
-     * @param b
-     * @param c
+     * @param side1
+     * @param side2
+     * @param side3
      * @return
      * @throws ServiceException
      */
     @Override
-    public String getTriangleType(Integer a, Integer b, Integer c)
+    public String getTriangleType(Integer side1, Integer side2, Integer side3)
             throws ServiceException
     {
-        if (a <= 0 || b <= 0 || c <= 0)
+        if ((side1 + side2 > side3))
+        {
+            if ((side1 == side2) && (side2 == side3))
+            {
+                return TriangleTypes.EQUILATERAL.name();
+            }
+            else if ((side1 == side2) && (side2 != side3) || (side2 == side3) && (side3 != side1))
+            {
+                return TriangleTypes.ISOSCELES.name();
+            }
+            else if ((side1 != side2) && (side2 != side3))
+            {
+                return TriangleTypes.SCALENE.name();
+            }
+        }
+        else
         {
             return TriangleTypes.INVALID.name();
-        }
-        else if (a == b && b == c)
-        {
-            return TriangleTypes.EQUILATERAL.name();
-        }
-        else if (b == c || a == b || c == a)
-        {
-            return TriangleTypes.ISOSCELES.name();
-        }
-        else if ((a != b) && (b != c) && (c != a))
-        {
-            return TriangleTypes.SCALENE.name();
         }
         return TriangleTypes.INVALID.name();
     }

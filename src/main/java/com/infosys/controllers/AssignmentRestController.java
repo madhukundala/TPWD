@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -35,9 +37,9 @@ public class AssignmentRestController
 
     @GetMapping(value = "/fibonacci", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get fibonacci Response", response = ResponseEntity.class)
-    public ResponseEntity<Long> getFibonacciSeries(@RequestParam(value = "n", required = true) Integer inputValue) throws ServiceException
+    public ResponseEntity<BigInteger> getFibonacciSeries(@RequestParam(value = "n", required = true) Integer inputValue) throws ServiceException
     {
-        Long resultValue = assignmentService.getFibonacciSeries(inputValue);
+        BigInteger resultValue = assignmentService.getFibonacciSeries(inputValue);
         logger.debug("result", resultValue);
         return ResponseEntity
                 .ok()
@@ -49,7 +51,7 @@ public class AssignmentRestController
     @ApiOperation(value = "Get Reverse Words Response", response = ResponseEntity.class)
     public ResponseEntity<String> getReverseWords(@RequestParam(value = "sentence", required = true) String reverseWords) throws ServiceException
     {
-        String resultValue = assignmentService.getReverseWords(reverseWords);
+        String resultValue = assignmentService.getReverseWords(URLEncoder.encode(reverseWords));
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())

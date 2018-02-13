@@ -19,4 +19,22 @@ public class GlobalExceptionHandlers
         return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
     }
 
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResource> handleNumberFormatException(NumberFormatException ex)
+    {
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), "Invalid Input " + ex.getMessage()));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ClassCastException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResource> handleClassCastException(ClassCastException ex)
+    {
+        return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), "Invalid Input " + ex.getMessage()));
+    }
+
+
 }
