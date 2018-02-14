@@ -2,6 +2,7 @@ package com.infosys.services;
 
 import com.infosys.exceptions.ServiceException;
 import com.infosys.util.TriangleTypes;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class AssignmentServiceImpl implements AssignmentService
     {
         if (null == inputvalue)
         {
-            throw new ServiceException("Invalid Value " + inputvalue);
+            throw new ServiceException("Invalid input " + inputvalue);
         }
         if (inputvalue == 1 || inputvalue == 2)
         {
@@ -46,7 +47,7 @@ public class AssignmentServiceImpl implements AssignmentService
         }
         if (inputvalue <= 0)
         {
-            throw new ServiceException("Invalid Value " + inputvalue);
+            throw new ServiceException("Invalid input " + inputvalue);
         }
         BigInteger fibo1 = new BigInteger("1");
         BigInteger fibo2 = new BigInteger("1");
@@ -73,7 +74,7 @@ public class AssignmentServiceImpl implements AssignmentService
     @Override
     public String getReverseWords(String inputvalue) throws ServiceException, Exception
     {
-        if (null == inputvalue)
+        if (null == inputvalue || StringUtils.isEmpty(inputvalue))
         {
             throw new ServiceException("Input cannot be null");
         }
@@ -133,10 +134,15 @@ public class AssignmentServiceImpl implements AssignmentService
         return TriangleTypes.INVALID.name();
     }
 
-    private boolean checkValidTriangle(Integer a, Integer b, Integer c)
+    private boolean checkValidTriangle(Integer a, Integer b, Integer c) throws ServiceException
     {
         boolean result = false;
-        if (!(a + b < c || a + c < b || b + c < a))
+        if (null == a || null == b || null == c)
+        {
+            throw new ServiceException("Input cannot be null");
+        }
+
+        else if (!(a + b < c || a + c < b || b + c < a))
         {
             result = true;
         }

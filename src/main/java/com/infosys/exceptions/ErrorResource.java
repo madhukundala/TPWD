@@ -3,13 +3,13 @@ package com.infosys.exceptions;
 public class ErrorResource
 {
 
-    private int code;
-    private String message;
+    private int errorCode;
+    private String errorMessage;
 
     public ErrorResource(int code, String message)
     {
-        this.code = code;
-        this.message = message;
+        this.errorCode = code;
+        this.errorMessage = message;
     }
 
     public ErrorResource()
@@ -17,24 +17,23 @@ public class ErrorResource
 
     }
 
-    public int getCode()
+    public int getErrorCode()
     {
-        return code;
+        return errorCode;
     }
 
-    public void setCode(int code)
+    public void setErrorCode(int errorCode)
     {
-        this.code = code;
+        this.errorCode = errorCode;
     }
 
-    public String getMessage()
+    public String getErrorMessage()
     {
-        return message;
+        return errorMessage;
     }
 
-    public void setMessage(String message)
+    public void setErrorMessage(String errorMessage)
     {
-        this.message = message;
+        this.errorMessage = errorMessage;
     }
-
 }

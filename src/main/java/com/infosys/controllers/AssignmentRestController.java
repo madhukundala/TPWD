@@ -40,7 +40,6 @@ public class AssignmentRestController
     public ResponseEntity<BigInteger> getFibonacciSeries(@RequestParam(value = "n", required = true) Integer inputValue) throws ServiceException
     {
         BigInteger resultValue = assignmentService.getFibonacciSeries(inputValue);
-        logger.debug("result", resultValue);
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())
