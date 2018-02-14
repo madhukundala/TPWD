@@ -139,7 +139,7 @@ public class AssignmentServiceImpl implements AssignmentService
         boolean result = false;
         if (null == a || null == b || null == c)
         {
-            throw new ServiceException("Input cannot be null");
+            throw new ServiceException("Input cannot be null or empty");
         }
 
         else if (!(a + b < c || a + c < b || b + c < a))
