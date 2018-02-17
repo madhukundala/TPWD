@@ -159,7 +159,7 @@ public class AssignmentTest
         catch (ServiceException e)
         {
             Assert.assertNotNull(e.getMessage());
-            Assert.assertEquals(e.getMessage(), "Invalid Value null");
+            Assert.assertEquals(e.getMessage(), "Invalid input null");
         }
     }
 
