@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriUtils;
 
+import javax.ws.rs.QueryParam;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Map;
@@ -48,9 +49,9 @@ public class AssignmentRestController
 
     @GetMapping(value = "/reverseWords", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get Reverse Words Response", response = ResponseEntity.class)
-    public ResponseEntity<String> getReverseWords(@RequestParam(value = "sentence", required = true) String reverseWords) throws ServiceException, Exception
+    public ResponseEntity<String> getReverseWords(@QueryParam("sentence") String sentence) throws ServiceException, Exception
     {
-        String resultValue = assignmentService.getReverseWords(UriUtils.decode(reverseWords, "UTF-8"));
+        String resultValue = assignmentService.getReverseWords(UriUtils.decode(sentence, "UTF-8"));
         return ResponseEntity
                 .ok()
                 .cacheControl(CacheControl.noCache())

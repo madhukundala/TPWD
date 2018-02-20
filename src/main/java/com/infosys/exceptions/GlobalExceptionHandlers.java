@@ -1,5 +1,7 @@
 package com.infosys.exceptions;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.core.JsonParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.util.UriUtils;
 
 @ControllerAdvice
 public class GlobalExceptionHandlers
@@ -59,9 +62,10 @@ public class GlobalExceptionHandlers
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
-    public ResponseEntity<ErrorResource> handleMissingParams(MissingServletRequestParameterException ex)
+    public ResponseEntity<ErrorResource> handleMissingParams(MissingServletRequestParameterException ex) throws UnsupportedEncodingException
     {
         String name = ex.getParameterName();
+        String value =UriUtils.decode(ex.getMessage(), "UTF-8");
         return ResponseEntity.badRequest().body(new ErrorResource(HttpStatus.BAD_REQUEST.value(), "Invalid input for request parameter, " + name));
     }
 
