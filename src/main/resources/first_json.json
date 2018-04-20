@@ -1,0 +1,47 @@
+{
+  "_links":{
+    "self":{
+      "href":"/api/services/45470ad9-dcf5-4c47-912e-104b0d31ef58"
+    },
+    "slug":{
+      "href":"/api/services/twcp-prod"
+    },
+    "curies":[
+      {
+        "name":"doc",
+        "href":"/#{rel}",
+        "templated":true
+      }
+    ],
+    "created-by":{
+      "href":"/api/users/cd3d4e3a-b58c-47d1-99fc-81ca60003dd2"
+    },
+    "updated-by":{
+      "href":"/api/users/b72f4797-ea39-4762-b457-18a69a66342b"
+    },
+    "compute-group":{
+      "href":"/api/compute_groups/4eb53f5d-08e8-4946-859a-58b58243374e"
+    },
+    "project":{
+      "href":"/api/projects/709a056f-0b48-4f4f-bebb-c07e777adf12"
+    }
+  },
+  "uuid":"45470ad9-dcf5-4c47-912e-104b0d31ef58",
+  "subdomain":"twcp",
+  "environment":"prod",
+  "virtual_ips":[
+    {
+      "ip_v4_address":"10.191.210.233",
+      "ip_v6_address":"fd78:1067:0133:0000:0000:0000:0000:2000",
+      "type":"virtual ip",
+      "order":0
+    }
+  ],
+  "static":false,
+  "ssl":null,
+  "public":false,
+  "description":null,
+  "template":null,
+  "updated":"2018-04-19T10:19:43Z",
+  "created":"2015-09-14T13:46:21Z"
+}
